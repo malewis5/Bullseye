@@ -66,15 +66,44 @@ struct LabelText: View {
     }
 }
 
+struct BodyText: View {
+    var text: String
+    
+    var body: some View {
+        Text(text)
+            .font(.subheadline)
+            .fontWeight(.semibold)
+            .multilineTextAlignment(.center)
+            .lineSpacing(12.0)
+    }
+}
+
+struct AlertButtonText: View {
+    var text: String
+    
+    var body: some View {
+        Text(text)
+            .bold()
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.accentColor)
+            .foregroundColor(.white)
+            .cornerRadius(12)
+    }
+}
+
 struct TextViews_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
+        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 10) {
             InstructionText(text: "Instruction Text")
             BigNumberText(text: "Big Number Text")
             SliderText(text: "Slider Text")
             ButtonText(text: "Button Text")
             LabelText(text: "Label Text")
+            BodyText(text: "Body Text")
+            AlertButtonText(text: "Alert Button Text")
         }
+        .padding()
     }
 }
 

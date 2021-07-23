@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var sliderValue = 50.0
+    @State private var sliderValue = 50.5
     @State private var alertIsVisible = false
     @State private var game = Game()
     
@@ -19,9 +19,17 @@ struct ContentView: View {
             BackgroundView(game: $game)
             VStack {
                 InstructionsView(game: $game)
-                SliderView(sliderValue: $sliderValue, sliderMin: 1.0, sliderMax: 100.0, sliderMinText: "1", sliderMaxText: "100")
-                    .padding()
+                    .padding(.bottom, alertIsVisible ? 0 : 100)
+                if alertIsVisible {
+                    PointsView(game: $game, sliderValue: $sliderValue, alertIsVisible: $alertIsVisible)
+                        .transition(.scale)
+                }
                 HitMeButton(alertIsVisible: $alertIsVisible, sliderValue: $sliderValue, game: $game)
+                    .transition(.scale)
+            }
+            if !alertIsVisible {
+                SliderView(sliderValue: $sliderValue, sliderMin: 1.0, sliderMax: 100.0, sliderMinText: "1", sliderMaxText: "100")
+                    .transition(.scale)
             }
         }
     }
@@ -48,7 +56,9 @@ struct HitMeButton: View {
     
     var body: some View {
         Button(action: {
-            alertIsVisible = true
+            withAnimation {
+                alertIsVisible = true
+            }
         }) {
             ButtonText(text: "Hit me")
         }
@@ -60,15 +70,11 @@ struct HitMeButton: View {
             }
         )
         .foregroundColor(Color.white)
-        .cornerRadius(21)
+        .cornerRadius(Constants.General.roundRectCornerRadius)
         .overlay(
-            RoundedRectangle(cornerRadius: 21.0)
-                .strokeBorder(Color.white, lineWidth: 2.0)
+            RoundedRectangle(cornerRadius: Constants.General.roundRectCornerRadius)
+                .strokeBorder(Color.white, lineWidth: Constants.General.strokeWidth)
         )
-        .alert(isPresented: $alertIsVisible, content: {
-            let roundedValue = Int(sliderValue.rounded())
-            return Alert(title: Text("Hello there!"), message: Text("The slider's value is \(roundedValue).\n" + "You scored \(game.calculatePoints(sliderValue: roundedValue)) points this round."), dismissButton: .default(Text("Awesome!")))
-        })
     }
     
 }

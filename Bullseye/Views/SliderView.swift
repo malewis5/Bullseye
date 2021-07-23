@@ -16,7 +16,7 @@ struct SliderView: View {
     
     var body: some View {
         HStack {
-            SliderText(text: sliderMinText)
+            SliderText(text: sliderMinText)          
             Slider(value: $sliderValue, in: sliderMin...sliderMax)
             SliderText(text: sliderMaxText)
         }
@@ -27,6 +27,6 @@ struct SliderView_Previews: PreviewProvider {
     @State private var sliderValue = 50.0
     
     static var previews: some View {
-        SliderView(sliderValue: .constant(20.0), sliderMin: 1.0, sliderMax: 100.0, sliderMinText: "1", sliderMaxText: "100")
+        SliderView(sliderValue: .constant(50.0), sliderMin: 1.0, sliderMax: 100.0, sliderMinText: "1", sliderMaxText: "100")
     }
 }

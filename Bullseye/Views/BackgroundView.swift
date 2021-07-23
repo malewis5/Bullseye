@@ -18,8 +18,7 @@ struct BackgroundView: View {
         }
         .padding()
         .background(
-            Color("BackgroundColor")
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            RingsView()
         )
         
     }
@@ -30,9 +29,20 @@ struct TopView: View {
     
     var body: some View {
         HStack {
-            RoundedImageViewStroked(systemName: "arrow.counterclockwise" )
+            Button(action: {
+                game.restartGame()
+            }) {
+                RoundedImageViewStroked(systemName: "arrow.counterclockwise")
+                    .onTapGesture {
+                        game.restartGame()
+                    }
+            }
             Spacer()
-            RoundedImageViewFilled(systemName: "list.dash")
+            Button(action: {
+                
+            }) {
+                RoundedImageViewFilled(systemName: "list.dash")
+            }
         }
     }
 }
@@ -61,8 +71,34 @@ struct BottomView: View {
     }
 }
 
+struct RingsView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
+    var body: some View {
+        ZStack {
+            Color("BackgroundColor")
+                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            ForEach(1..<6) { ring in
+                let size = ring * 100
+                let opacity = colorScheme == .dark ? 0.1 : 0.3
+                Circle()
+                    .stroke(lineWidth: 20.0)
+                    .fill(
+                        RadialGradient(gradient: Gradient(colors: [Color("RingColor").opacity(0.8*opacity), Color("RingColor").opacity(0)]), center: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, startRadius: 100, endRadius: 300)
+                    )
+                    .frame(width: CGFloat(size), height: CGFloat(size))
+            }
+        }
+    }
+}
+
 struct BackgroundView_Previews: PreviewProvider {
     static var previews: some View {
-        BackgroundView(game: .constant(Game()))
+        Group {
+            BackgroundView(game: .constant(Game()))
+            BackgroundView(game: .constant(Game()))
+                .previewLayout(.fixed(width: 812, height: 375))
+                .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+        }
     }
 }
