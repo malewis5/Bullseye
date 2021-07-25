@@ -22,6 +22,14 @@ class BullseyeTests: XCTestCase {
         game = nil
     }
     
+    func playGame(rounds: Int, scorePerRound: Int) -> Game {
+        var testGame = Game()
+        for _ in (1...rounds) {
+            testGame.startNewRound(points: scorePerRound)
+        }
+        return testGame
+    }
+    
     func testScorePositive() {
         let guess = game.targetValue + 5
         let score = game.calculatePoints(sliderValue: guess)
@@ -73,12 +81,26 @@ class BullseyeTests: XCTestCase {
     }
     
     func testLeaderboard() {
-        game.startNewRound(points: 100)
-        XCTAssertEqual(game.leaderboardEntries[0].score, 100)
-        game.startNewRound(points: 200)
-        XCTAssertEqual(game.leaderboardEntries[0].score, 200)
-        XCTAssertEqual(game.leaderboardEntries[1].score, 100)
+        var game = playGame(rounds: 4, scorePerRound: 50)
+        XCTAssertEqual(game.leaderboardEntries.count, 1)
+        XCTAssertEqual(game.leaderboardEntries[0].score, 50 * 4)
+        game.startNewRound(points: 75)
+        game.startNewRound(points: 75)
+        game.startNewRound(points: 75)
+        game.startNewRound(points: 75)
+        XCTAssertEqual(game.leaderboardEntries.count, 2)
+        XCTAssertEqual(game.leaderboardEntries[0].score, 75*4)
+        XCTAssertEqual(game.leaderboardEntries[1].score, 50*4)
     }
     
+    func testLoseGame() {
+        let testGame = playGame(rounds: 4, scorePerRound: 94)
+        let livesRemaining = testGame.livesRemaining
+        let count = testGame.leaderboardEntries.count
+        let score = testGame.leaderboardEntries[0].score
+        XCTAssertEqual(livesRemaining, 3)
+        XCTAssertEqual(count, 1)
+        XCTAssertEqual(score, 94 * 4)
+    }
     
 }

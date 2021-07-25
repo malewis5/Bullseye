@@ -47,11 +47,13 @@ struct Game {
     
     
     mutating func startNewRound(points: Int) {
-        addLeaderBoardEntry(points: points)
         removeLife(points: points)
         totalScore += points
         currentRound += 1
         targetValue = Int.random(in: 1...100)
+        if livesRemaining < 0 {
+            loseGame(totalScore: totalScore)
+        }
     }
     
     mutating func restartGame() {
@@ -59,6 +61,11 @@ struct Game {
         currentRound = 1
         livesRemaining = 3
         targetValue = Int.random(in: 1...100)
+    }
+    
+    mutating func loseGame(totalScore: Int) {
+        addLeaderBoardEntry(points: totalScore)
+        restartGame()
     }
     
     mutating func addLeaderBoardEntry(points: Int) {

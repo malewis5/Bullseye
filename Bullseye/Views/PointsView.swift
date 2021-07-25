@@ -14,6 +14,7 @@ struct PointsView: View {
     
     var body: some View {
         let roundedValue = Int(sliderValue.rounded())
+        let buttonText: String = game.livesRemaining == 0 ? "Restart game" : "Start Next Round"
         let points = game.calculatePoints(sliderValue: roundedValue)
         VStack(spacing: 10) {
             InstructionText(text: "The slider's value is")
@@ -21,11 +22,12 @@ struct PointsView: View {
             BodyText(text: "You scored \(points) points\n 🎉🎉🎉")
             Button(action: {
                 withAnimation {
-                    game.startNewRound(points: points)
+                    game.livesRemaining > 0 ?
+                        game.startNewRound(points: points) : game.loseGame(totalScore: game.totalScore)
                     alertIsVisible = false
                 }
             }, label: {
-                AlertButtonText(text: "Start New Round")
+                AlertButtonText(text: buttonText)
             })
         }
         .padding()
