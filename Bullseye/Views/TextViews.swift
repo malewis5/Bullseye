@@ -92,6 +92,43 @@ struct AlertButtonText: View {
     }
 }
 
+struct ScoreText: View {
+    var score: Int
+    
+    var body: some View {
+        Text("\(score)")
+            .bold()
+            .kerning(-0.2)
+            .font(.title3)
+            .foregroundColor(Color("TextColor"))
+    }
+}
+
+struct DateText: View {
+    var date: Date
+    
+    var body: some View {
+        Text(date, style: .time)
+            .bold()
+            .kerning(-0.2)
+            .font(.title3)
+            .foregroundColor(Color("TextColor"))
+    }
+}
+
+struct BigBoldText: View {
+    let text: String
+    
+    var body: some View {
+        Text(text.uppercased())
+            .fontWeight(.black)
+            .kerning(2.0)
+            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            .foregroundColor(Color("TextColor"))
+    }
+}
+
+
 struct TextViews_Previews: PreviewProvider {
     static var previews: some View {
         VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 10) {
@@ -102,6 +139,9 @@ struct TextViews_Previews: PreviewProvider {
             LabelText(text: "Label Text")
             BodyText(text: "Body Text")
             AlertButtonText(text: "Alert Button Text")
+            ScoreText(score: 454349)
+            DateText(date: Date())
+            BigBoldText(text: "Big Bold Text")
         }
         .padding()
     }

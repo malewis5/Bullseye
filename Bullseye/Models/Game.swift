@@ -11,6 +11,16 @@ struct Game {
     var targetValue = Int.random(in: 1...100)
     var totalScore = 0
     var currentRound = 1
+    var leaderboardEntries: [LeaderboardEntry] = []
+    var livesRemaining = 3
+    
+    init(loadTestData: Bool = false) {
+        if loadTestData {
+            for test in (1...60) {
+                addLeaderBoardEntry(points: test * 1000)
+            }
+        }
+    }
     
     func calculatePoints(sliderValue: Int) -> Int {
         let difference = abs(sliderValue - targetValue)
@@ -28,9 +38,17 @@ struct Game {
         return 100 - difference + bonus
     }
     
+    mutating func removeLife(points: Int) {
+        if (points < 95) {
+            livesRemaining -= 1
+        }
+    }
+    
     
     
     mutating func startNewRound(points: Int) {
+        addLeaderBoardEntry(points: points)
+        removeLife(points: points)
         totalScore += points
         currentRound += 1
         targetValue = Int.random(in: 1...100)
@@ -39,6 +57,19 @@ struct Game {
     mutating func restartGame() {
         totalScore = 0
         currentRound = 1
+        livesRemaining = 3
         targetValue = Int.random(in: 1...100)
     }
+    
+    mutating func addLeaderBoardEntry(points: Int) {
+        leaderboardEntries.append(LeaderboardEntry(score: points, date: Date()))
+        leaderboardEntries.sort { $0.score > $1.score }
+        
+    }
+    
+}
+
+struct LeaderboardEntry {
+    let score: Int
+    let date: Date
 }

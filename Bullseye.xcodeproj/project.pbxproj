@@ -16,6 +16,7 @@
 		83B102AF26AB4D550087A8A1 /* PointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B102AE26AB4D550087A8A1 /* PointsView.swift */; };
 		83B102B126AB5D650087A8A1 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B102B026AB5D650087A8A1 /* Shapes.swift */; };
 		83B102B526AB62560087A8A1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B102B426AB62560087A8A1 /* Constants.swift */; };
+		83B102B726ADC3210087A8A1 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B102B626ADC3210087A8A1 /* LeaderboardView.swift */; };
 		83EAA1FE26A73C5C00A5784A /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EAA1FD26A73C5C00A5784A /* Game.swift */; };
 		E14A3979253A00D500DB69A0 /* BullseyeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14A3978253A00D500DB69A0 /* BullseyeApp.swift */; };
 		E14A397B253A00D500DB69A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14A397A253A00D500DB69A0 /* ContentView.swift */; };
@@ -45,6 +46,7 @@
 		83B102AE26AB4D550087A8A1 /* PointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsView.swift; sourceTree = "<group>"; };
 		83B102B026AB5D650087A8A1 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		83B102B426AB62560087A8A1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		83B102B626ADC3210087A8A1 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		83EAA1FD26A73C5C00A5784A /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		E14A3975253A00D500DB69A0 /* Bullseye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bullseye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E14A3978253A00D500DB69A0 /* BullseyeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullseyeApp.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				83A6590E26A7936700DA0BB6 /* BackgroundView.swift */,
 				83B102AE26AB4D550087A8A1 /* PointsView.swift */,
 				83B102B026AB5D650087A8A1 /* Shapes.swift */,
+				83B102B626ADC3210087A8A1 /* LeaderboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				83B102AF26AB4D550087A8A1 /* PointsView.swift in Sources */,
 				83B102B526AB62560087A8A1 /* Constants.swift in Sources */,
 				83A6590F26A7936700DA0BB6 /* BackgroundView.swift in Sources */,
+				83B102B726ADC3210087A8A1 /* LeaderboardView.swift in Sources */,
 				E14A3979253A00D500DB69A0 /* BullseyeApp.swift in Sources */,
 				83A6590D26A78BE100DA0BB6 /* RoundedViews.swift in Sources */,
 				83A6590926A77F2200DA0BB6 /* SliderView.swift in Sources */,
@@ -291,7 +295,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9HHQW39MGL;
 				INFOPLIST_FILE = BullseyeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,7 +316,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9HHQW39MGL;
 				INFOPLIST_FILE = BullseyeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
