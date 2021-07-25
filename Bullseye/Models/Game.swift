@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import FirebaseDatabase
+import FirebaseAnalytics
 
 struct Game {
     var targetValue = Int.random(in: 1...100)
@@ -13,6 +15,8 @@ struct Game {
     var currentRound = 1
     var leaderboardEntries: [LeaderboardEntry] = []
     var livesRemaining = 3
+    var ref = Database.database().reference()
+    
     
     init(loadTestData: Bool = false) {
         if loadTestData {
@@ -71,7 +75,14 @@ struct Game {
     mutating func addLeaderBoardEntry(points: Int) {
         leaderboardEntries.append(LeaderboardEntry(score: points, date: Date()))
         leaderboardEntries.sort { $0.score > $1.score }
-        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/YY hh:mm a"
+        let fbValue: NSDictionary = [
+            "Score": totalScore,
+            "Date": dateFormatter.string(from: Date())
+        ]
+        print(fbValue)
+        ref.child("Leaderboard").childByAutoId().setValue(fbValue)
     }
     
 }
